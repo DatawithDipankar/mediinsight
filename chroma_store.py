@@ -11,6 +11,9 @@ Provides:
   - retrieve_documents()       → list[dict]
   - get_collection_stats()     → dict
 """
+# Suppress protobuf conflict on Streamlit Cloud
+import os
+os.environ["PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION"] = "python"
 
 from __future__ import annotations
 
