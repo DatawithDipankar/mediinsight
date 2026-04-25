@@ -86,14 +86,13 @@ class MediAssistRAG:
 
     # ── Step 1: Query the vector store ────────────────────────────────────────
 
-    def retrieve(self, query: str) -> list[dict[str, Any]]:
-        """
-        Query ChromaDB with the user's natural-language question.
-        Returns the top-k most semantically similar articles.
-        """
-        results = retrieve_documents(query, self.collection, n_results=self.top_k)
-        return results
-
+    def retrieve(self, query: str, n_results: int = 5) -> list:
+      """
+      Query the vector store with the user's question.
+      Returns the top-k most semantically similar articles.
+      """
+      results = retrieve_documents(query=query, n_results=n_results)
+      return results
     # ── Step 2: Build context + prompt ────────────────────────────────────────
 
     @staticmethod
