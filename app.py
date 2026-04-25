@@ -7,13 +7,12 @@ import os, json, requests
 from xml.etree import ElementTree
 import streamlit as st
 from dotenv import load_dotenv
-import shutil
 
 load_dotenv()
 
 from chroma_store import (
     TFIDFEmbeddingFunction, get_client, get_or_create_collection,
-    build_document, ingest_articles, retrieve_documents,
+    build_document, ingest_articles, retrieve_documents, get_collection_stats
 )
 from rag import MediAssistRAG
 
