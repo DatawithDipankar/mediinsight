@@ -125,13 +125,11 @@ def pubmed_fetch(pmids):
     return articles
 
 def build_rag(articles):
-    shutil.rmtree("./chroma_db", ignore_errors=True)
-    ef = TFIDFEmbeddingFunction(max_features=1024)
-    ef.fit([build_document(a) for a in articles])
+    ef = TFIDFEmbeddingFunction()       # no arguments
     client = get_client()
-    collection = get_or_create_collection(client, embedding_func=ef)
-    ingest_articles(articles, collection)
-    rag = MediAssistRAG(collection=collection, groq_api_key=os.environ.get("GROQ_API_KEY",""), top_k=5)
+    collection = get_or_create_collection(client)
+    ingest_articles(articles, collection)   # fitting happens inside ingest_articles
+    rag = MediAssistRAG(collection, ef)
     return ef, collection, rag
 
 # ══════════════════════════════════════════════════════════════════
