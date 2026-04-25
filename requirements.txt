@@ -1,0 +1,9 @@
+# MediAssist AI — Python dependencies
+# Install with: pip install -r requirements.txt
+
+chromadb==1.5.8
+groq==1.2.0
+streamlit==1.56.0
+requests==2.33.1
+scikit-learn==1.8.0
+python-dotenv==1.2.2
