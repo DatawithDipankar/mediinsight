@@ -188,11 +188,11 @@ with st.sidebar:
         if st.button("Ingest into Vector Store"):
             arts = st.session_state.search_results
             with st.spinner(f"Ingesting {len(arts)} articles…"):
-                ef, col, rag = build_rag(arts)
-                st.session_state.ef             = ef
-                st.session_state.collection     = col
-                st.session_state.rag            = rag
-                st.session_state.ingested_count = col.count()
+                ef, collection, rag = build_rag(arts)
+                st.session_state.ef = ef
+                st.session_state.collection = collection
+                st.session_state.rag = rag
+                st.session_state.ingested_count = get_collection_stats()["count"]
             st.markdown(f'<div class="alert a-ok">✓ Ingested <b>{st.session_state.ingested_count}</b> articles. Ready!</div>', unsafe_allow_html=True)
             st.rerun()
 
