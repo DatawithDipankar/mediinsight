@@ -124,11 +124,12 @@ def pubmed_fetch(pmids):
     return articles
 
 def build_rag(articles):
-    ef = TFIDFEmbeddingFunction()       # no arguments
+    ef = TFIDFEmbeddingFunction()
     client = get_client()
     collection = get_or_create_collection(client)
-    ingest_articles(articles, collection)   # fitting happens inside ingest_articles
-    rag = MediAssistRAG(collection, ef)
+    ingest_articles(articles, collection)
+    groq_api_key = st.secrets.get("GROQ_API_KEY") or os.environ.get("GROQ_API_KEY", "")
+    rag = MediAssistRAG(collection, groq_api_key=groq_api_key)
     return ef, collection, rag
 
 # ══════════════════════════════════════════════════════════════════
